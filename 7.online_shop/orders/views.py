@@ -1,13 +1,14 @@
-from django.shortcuts import render
+from django.shortcuts import render, HttpResponse
 from .models import OrderItem
 from .forms import OrderCreateForm
 from cart.cart import Cart
 # Create your views here.
 
+
 def order_create(request):
     cart = Cart(request)
-    if request.method=='POST':
-        form=OrderCreateForm(request.POST)
+    if request.method == 'POST':
+        form = OrderCreateForm(request.POST)
         if form.is_valid():
             order = form.save()
             for item in cart:
@@ -20,8 +21,8 @@ def order_create(request):
             return render(request,
                           'orders/order/created.html',
                           {'order': order})
-        else:
-            form = OrderCreateForm()
-        return render(request,
-                      'orders/order/create.html',
-                      {'cart': cart, 'form': form})
+    else:
+        form = OrderCreateForm()
+    return render(request,
+                  'orders/order/create.html',
+                  {'cart': cart, 'form': form})
