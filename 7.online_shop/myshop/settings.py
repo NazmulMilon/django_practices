@@ -9,7 +9,6 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
-from braintree import Configuration, Environment
 from pathlib import Path
 import os
 
@@ -41,6 +40,7 @@ INSTALLED_APPS = [
     'shop', #or 'shop.apps.ShopConfig',
     'cart',
     'orders',
+    'payment',
 
 
 ]
@@ -145,6 +145,7 @@ BRAINTREE_MERCHANT_ID = 'XXX'
 BRAINTREE_PUBLIC_KEY = 'XXX'
 BRAINTREE_PRIVATE_KEY = 'XXX'
 
+from braintree import Configuration, Environment
 
 Configuration.configure(
     Environment.Sandbox,
